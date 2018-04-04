@@ -1,0 +1,172 @@
+﻿@using System.Web.Configuration;
+@using Microsoft.Live;
+
+@{
+    try
+    {
+        // Get their User Name and ID from Windows Live.
+        if (GetDataFromWindowsLive())
+        {
+            // Verify they're signing up with a valid invitation code.
+            var invitationCode = Request.QueryString["i"];
+            var isNew = false;
+            if (!String.IsNullOrWhiteSpace(invitationCode))
+            {
+                invitationCode = invitationCode.ToLowerInvariant();
+                isNew = true;
+            }
+            else
+            {
+                invitationCode = GetPreviousInvitationCode();
+            }
+
+            var status = VerifyCode(invitationCode, isNew);
+            if (status == CodeStatus.Valid)
+            {
+                if (isNew)
+                {
+                    Azure.Set("codes", invitationCode, UserID);
+                }
+                @LetIn();
+            }
+            else
+            {
+                @Reject(status, isNew);
+            }
+        }
+        else if (Request.Url.Host == "localhost")
+        {
+            UserID = "localhost";
+            UserName = "localhost";
+            @LetIn();
+        }
+        else
+        {
+            @Reject("Unauthenticated. Please sign in first.");
+        }
+    }
+    catch (Exception ex)
+    {
+        @Reject(ex.Message);
+    }
+}
+
+@functions
+{
+    public string UserID;
+    public string UserName;
+
+    public bool GetDataFromWindowsLive()
+    {
+        var wl_auth = Request.Cookies["wl_auth"];
+        if (wl_auth == null)
+        {
+            return false;
+        }
+
+        var access_token = wl_auth.Values["access_token"];
+        if (String.IsNullOrWhiteSpace(access_token))
+        {
+            return false;
+        }
+
+        var client = new LiveConnectClient((LiveConnectSession)Activator.CreateInstance(typeof(LiveConnectSession), true));
+        typeof(LiveConnectSession).GetProperty("AccessToken").SetValue(client.Session, access_token);
+        var result = client.GetAsync("me").Result;
+        var data = result.Result;
+        if (!data.ContainsKey("id") || !data.ContainsKey("name"))
+        {
+            throw new LiveConnectException(null, "Windows Live returned an error: " + result.RawResult);
+        }
+
+        UserID = (string)data["id"];
+        UserName = (string)data["name"];
+        return true;
+    }
+
+    public enum CodeStatus
+    {
+        Valid,
+        Invalid,
+        Expired,
+        InUse,
+        NoCode
+    }
+
+    public string GetPreviousInvitationCode()
+    {
+        var existingRegistrations = Azure.Query("codes", String.Format("RowKey eq '{0}'", UserID));
+        return existingRegistrations.OrderBy(reg => reg.Timestamp).Select(reg => reg.PartitionKey).LastOrDefault();
+    }
+
+    public CodeStatus VerifyCode(string invitationCode, bool checkOtherUsage = true)
+    {
+        if (String.IsNullOrWhiteSpace(invitationCode))
+        {
+            return CodeStatus.NoCode;
+        }
+
+        var latestCodes = Azure.Get("content", "InvitationCodes", "Latest").Properties["ID"].StringValue;
+        var matchingCode = Azure.Query("content", String.Format("PartitionKey eq '{0}' and Code eq '{1}'", latestCodes, invitationCode)).SingleOrDefault();
+        if (matchingCode == null)
+        {
+            return CodeStatus.Invalid;
+        }
+
+        DateTime expiryDate;
+        if (matchingCode.Properties.ContainsKey("ExpiryDate") &&
+            DateTime.TryParse(matchingCode.Properties["ExpiryDate"].StringValue, out expiryDate) &&
+            expiryDate <= DateTime.Now)
+        {
+            return CodeStatus.Expired;
+        }
+
+        if (checkOtherUsage)
+        {
+            var existingUsages = Azure.Query("codes", String.Format("PartitionKey eq '{0}'", invitationCode));
+            if (existingUsages.Any(usage => usage.RowKey != UserID))
+            {
+                return CodeStatus.InUse;
+            }
+        }
+
+        return CodeStatus.Valid;
+    }
+}
+
+@helper LetIn()
+{
+    @Html.Raw(Json.Encode(new
+    {
+        userID = UserID,
+        userName = UserName,
+        mediaLocation = Environment.GetEnvironmentVariable("MediaLocation") + "/", // e.g. "https://YOURACCOUNT.blob.core.windows.net/",
+        SAS_content = Environment.GetEnvironmentVariable("ContentSAS"), // e.g. "https://YOURACCOUNT.table.core.windows.net/TABLENAME?tn=TABLENAME&sv=2015-12-11&si=POLICY&spr=https&sig=SIGNATURE",
+        SAS_data = Azure.GetTableSASForUser(UserID, "data", true, true, false, false),
+        SAS_notes = Azure.GetTableSASForUser(UserID, "notes", true, true, false, false),
+        SAS_calendar = Azure.GetTableSASForUser(UserID, "calendar", true, true, false, false),
+        SAS_diarycards = Azure.GetTableSASForUser(UserID, "diarycards", true, true, false, false),
+        SAS_logs = Azure.GetTableSASForUser(UserID, "logs", false, true, false, false)
+    }));
+}
+
+@helper Reject(CodeStatus status, bool isNew)
+{
+    var error = status == CodeStatus.Invalid ? (isNew ? "Invalid invitation code." : "Your invitation code is no longer valid.") :
+                status == CodeStatus.Expired ? (isNew ? "That code has expired." : "Your invitation code has expired.") :
+                status == CodeStatus.InUse ? (isNew ? "That code is being used by another account." : "Your invitation code is being used by another account.") :
+                null;
+    @Reject(error);
+}
+
+@helper Reject(string error)
+{
+    @Html.Raw(Json.Encode(new
+    {
+        error = error,
+        userID = UserID,
+        userName = UserName,
+        mediaLocation = Environment.GetEnvironmentVariable("MediaLocation") + "/",
+        SAS_logs = Azure.GetTableSASForUser(UserID, "logs", false, true, false, false),
+    }));
+}

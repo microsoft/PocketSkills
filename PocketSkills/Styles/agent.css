@@ -1,0 +1,82 @@
+#mainAgent + .bubble {
+    display: block;
+    position: absolute;
+    left: 56px;
+    bottom: 86px;
+    padding: 12px;
+    margin-right: 10px;
+    color: black;
+    background-color: #F2F2F2; /* Grey */
+    border-color: transparent #F2F2F2; /* Grey triangle */
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px #aaaaaa;
+    -webkit-animation: .25s appear ease-out;
+    animation: .25s appear ease-out;
+    -webkit-transform-origin: bottom left;
+    transform-origin: bottom left;
+}
+
+    /* Chat bubble triangle on bubbles */
+    #mainAgent + .bubble::after {
+        content: "";
+        position: absolute;
+        bottom: -19px;
+        left: 10px;
+        border-style: solid;
+        border-width: 0px 0px 20px 20px;
+        border-color: inherit;
+    }
+
+/* Typing bubble */
+#mainAgent + .typing.bubble {
+    -webkit-animation: .25s typing ease-out;
+    animation: .25s typing ease-out;
+}
+
+#mainAgent + .bubble img,
+#mainAgent + .bubble audio,
+#mainAgent + .bubble video {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+@-webkit-keyframes typing {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes typing {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes appear {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

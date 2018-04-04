@@ -1,0 +1,39 @@
+html {
+    outline: 2px dashed honeydew;
+}
+
+body {
+    outline: 2px dashed black;
+}
+
+div {
+    outline: 1px dashed dimgray;
+}
+
+span {
+    outline: 1px dashed tan;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    outline: 1px dashed hotpink;
+}
+
+ol, ul {
+    outline: 2px dashed lime;
+}
+
+li {
+    outline: 1px dashed lime;
+}
+
+input, textarea {
+    outline: 2px dashed indigo;
+}
+
+button {
+    outline: 1px dashed burlywood;
+}
+
+* {
+    outline: 1px dashed red;
+}

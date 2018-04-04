@@ -1,0 +1,191 @@
+﻿.store {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+}
+
+    .store > .search {
+        background-color: #F2F2F2;
+        border: 0px;
+        border-radius: 5px;
+        height: 42px;
+        padding: 0px 10px;
+        margin: 12px 0px;
+    }
+
+    .store > .filter {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        margin-bottom: 12px;
+    }
+
+        .store > .filter > label {
+            flex: 1;
+            margin: 0px;
+            line-height: 42px;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px 1px 1px 0px;
+            border-color: #3FA9F5;
+            color: #3FA9F5;
+        }
+
+            .store > .filter > label:first-child {
+                border-left-width: 1px;
+                border-radius: 5px 0px 0px 5px;
+            }
+
+            .store > .filter > label:last-child {
+                border-radius: 0px 5px 5px 0px;
+            }
+
+            .store > .filter > label.selected {
+                background-color: #3FA9F5;
+                color: white;
+            }
+
+            .store > .filter > label > input {
+                display: none;
+            }
+
+    .store > .list {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-wrap: wrap;
+        margin: -6px;
+    }
+
+        .store > .list .item,
+        .store > .list .spacer {
+            margin: 6px; /* Ends up being 12px between items */
+            flex: 140px; /* Items should be at least 140px.  This still leaves room for 2 columns on iPhone 5 */
+        }
+
+        .store > .list .spacer {
+            margin-top: 0;
+            margin-bottom: 0px;
+        }
+
+        .store > .list .item > .item-content {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            flex-direction: column;
+        }
+
+            .store > .list .item > .item-content > .item-thumbnail > img {
+                display: block;
+                background-color: black;
+                width: 100%;
+            }
+
+        .store > .list .item.purchased > .item-content > .item-thumbnail::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url(/Icons/purchased-video.png);
+        }
+
+        .store > .list .item > .item-content > .item-label {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+
+            .store > .list .item > .item-content > .item-label > .item-ancestry {
+                font-size: 11px;
+                color: #39b54a;
+                margin: 8px 0px;
+            }
+
+            .store > .list .item > .item-content > .item-label > .item-title {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .store > .list .item > .item-content > .item-label > .item-cost {
+                margin-top: 6px;
+            }
+
+                .store > .list .item > .item-content > .item-label > .item-cost > .sparkle {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 3px;
+                    background-image: url(/Icons/Sparkles.png);
+                }
+
+                .store > .list .item > .item-content > .item-label > .item-cost > .points {
+                    display: inline-block;
+                    vertical-align: middle;
+                    background-color: #39B54A;
+                    border-radius: 15px;
+                    font-size: 12px;
+                    color: white;
+                    padding: 2px 4px;
+                }
+
+
+    .store > .item-viewer {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        padding: 10px 10px 40px 10px;
+        overflow-y: scroll;
+    }
+
+        .store > .item-viewer > .item-thumbnail {
+            background-color: black;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .store > .item-viewer > .item-ancestry {
+            font-size: 11px;
+            color: #39b54a;
+            margin-bottom: 8px;
+        }
+
+        .store > .item-viewer > .item-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .store > .item-viewer > .item-cost {
+            margin-top: 6px;
+        }
+
+            .store > .item-viewer > .item-cost > .sparkle {
+                display: inline-block;
+                vertical-align: middle;
+                width: 24px;
+                height: 24px;
+                margin-right: 3px;
+                background-image: url(/Icons/Sparkles.png);
+            }
+
+            .store > .item-viewer > .item-cost > .points {
+                display: inline-block;
+                vertical-align: middle;
+                background-color: #39B54A;
+                border-radius: 15px;
+                font-size: 12px;
+                color: white;
+                padding: 2px 4px;
+            }
+
+        .store > .item-viewer > .item-type {
+            margin-top: 6px;
+            font-size: 11px;
+            color: #B3B3B3;
+        }
+
+        .store > .item-viewer > .item-description {
+            margin-top: 15px;
+            font-size: 16px;
+        }

@@ -1,0 +1,296 @@
+﻿.diarycards {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+}
+
+    .diarycards > .search {
+        background-color: #F2F2F2;
+        border: 0px;
+        border-radius: 5px;
+        height: 42px;
+        padding: 0px 10px;
+        margin: 12px 0px;
+    }
+
+    .diarycards > .cards {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-wrap: wrap;
+        margin: 6px -6px;
+    }
+
+        .diarycards > .cards > .card-container,
+        .diarycards > .cards > .spacer {
+            position: relative;
+            flex: 140px;
+            margin: 6px;
+        }
+
+            .diarycards > .cards > .card-container::before {
+                content: "";
+                display: block;
+                float: left;
+                padding-top: 56%;
+            }
+
+        .diarycards > .cards > .spacer {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .diarycards > .cards > .card-container > .card > .card-selector {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            align-items: center;
+            justify-content: center;
+            background-color: #39B54A;
+            color: white;
+            height: 24px;
+            width: 24px;
+            margin: 0px;
+            visibility: collapse;
+            z-index: 1;
+        }
+
+            .diarycards > .cards > .card-container > .card > .card-selector > input[type="checkbox"] {
+                display: none;
+            }
+
+        .diarycards > .cards.showDelete > .card-container > .card::after {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: white;
+            opacity: .75;
+        }
+
+        .diarycards > .cards.showDelete > .card-container > .card > .card-selector {
+            visibility: visible;
+        }
+
+        .diarycards > .cards > .card-container > .card.selected > .card-selector::before {
+            content: '✘';
+        }
+
+    .diarycards > .card-editor {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: white;
+    }
+
+        .diarycards > .card-editor,
+        .diarycards > .card-editor * {
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+
+            .diarycards > .card-editor > .card-title {
+                background-color: #F2F2F2;
+                border: 0px;
+                border-radius: 5px;
+                height: 42px;
+                padding: 0px 10px;
+                margin: 12px 0px;
+            }
+
+            .diarycards > .card-editor > .card-date {
+                font-weight: bold;
+                margin: 8px;
+            }
+
+            .diarycards > .card-editor > .card {
+                flex: 1;
+                padding: 0px 10px 40px 10px;
+                background: white;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+            }
+
+            .diarycards > .card-editor,
+            .diarycards > .card-editor button,
+            .diarycards > .card-editor input,
+            .diarycards > .card-editor select,
+            .diarycards > .card-editor optgroup,
+            .diarycards > .card-editor textarea {
+                font-size: 12pt;
+            }
+
+                .diarycards > .card-editor flex > *:not(:first-child) {
+                    flex-grow: 2;
+                }
+
+                .diarycards > .card-editor p,
+                .diarycards > .card-editor label,
+                .diarycards > .card-editor input,
+                .diarycards > .card-editor select,
+                .diarycards > .card-editor .value {
+                    margin: 10px;
+                }
+
+                .diarycards > .card-editor .split {
+                    column-count: 2;
+                    column-gap: 0px;
+                }
+
+                .diarycards > .card-editor .value,
+                .diarycards > .card-editor .rangeValue {
+                    background-color: aliceblue;
+                    padding: 5px;
+                    border-radius: 5px;
+                    min-height: 1em;
+                }
+
+                .diarycards > .card-editor .rangeValue {
+                    display: inline-block;
+                    min-width: 48px;
+                    min-height: 48px;
+                    line-height: 48px;
+                    text-align: center;
+                    margin: 5px !important;
+                    padding: 0px !important;
+                    border-radius: 50px 50px 50px 50px !important;
+                }
+
+                .diarycards > .card-editor .horizontalScroll {
+                    position: absolute;
+                    left: 0px;
+                    right: 0px;
+                    white-space: nowrap;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+                }
+
+                .diarycards > .card-editor .field {
+                    position: relative;
+                }
+
+                    .diarycards > .card-editor .field.selected label {
+                        font-weight: bold;
+                    }
+
+                    .diarycards > .card-editor .field.selected::before {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        top: 42%;
+                        border-style: solid;
+                        border-color: transparent black;
+                        border-width: 5px 0px 5px 10px;
+                    }
+
+                    .diarycards > .card-editor .field .value {
+                        font-weight: bold;
+                    }
+
+                    .diarycards > .card-editor .field.Bad .value {
+                        color: #ED1C24;
+                    }
+
+                    .diarycards > .card-editor .field.Ok .value {
+                        color: #F7931E;
+                    }
+
+                    .diarycards > .card-editor .field.Good .value {
+                        color: #39B54A;
+                    }
+
+                .diarycards > .card-editor > .popup {
+                    flex-shrink: 0;
+                    height: 120px;
+                    padding: 20px 10px 30px 10px;
+                    overflow: hidden;
+                    color: white;
+                    background-color: #4D4D4D;
+                }
+
+                    .diarycards > .card-editor > .popup .header {
+                        font-weight: bold;
+                    }
+
+                    .diarycards > .card-editor > .popup input[type=radio] + label {
+                        text-align: center;
+                        padding: 10px;
+                        border-radius: 5px;
+                        background-color: white;
+                        color: black;
+                    }
+
+                    .diarycards > .card-editor > .popup input[type=radio]:checked + label {
+                        background-color: #39B54A;
+                        color: white;
+                    }
+
+.card.thumbnail {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 12px;
+    border-radius: 5px;
+    background: #F2F2F2;
+}
+
+    .card.thumbnail > .bars {
+        flex: 1;
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+        .card.thumbnail > .bars > .bar {
+            flex: 0 1 10px;
+            position: relative;
+            margin-right: 1px;
+        }
+
+            .card.thumbnail > .bars > .bar > * {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+            }
+
+    .card.thumbnail > .divider {
+        height: 1px;
+        background: #B3B3B3;
+    }
+
+    .card.thumbnail > .date {
+        color: #39B54A;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+.card.full {
+    height: 100%;
+}
+
+    .card.full > .items * {
+        align-self: center;
+        break-inside: avoid;
+    }
+
+    .card.full > .items .date {
+        align-self: flex-end;
+        text-align: right;
+        margin-right: 10px;
+    }

@@ -1,0 +1,115 @@
+﻿.library {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+}
+
+    .library > .search {
+        background-color: #F2F2F2;
+        border: 0px;
+        border-radius: 5px;
+        height: 42px;
+        padding: 0px 10px;
+        margin: 12px 0px;
+    }
+
+    .library > .list .item {
+        margin-bottom: 10px;
+    }
+
+        .library > .list .item > .item-content {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+        }
+
+            .library > .list .item > .item-content > .item-thumbnail {
+                flex-shrink: 0;
+                background-color: black;
+                margin-right: 12px;
+                position: relative;
+            }
+
+                .library > .list .item > .item-content > .item-thumbnail > img {
+                    display: block;
+                    max-width: 130px;
+                }
+
+        .library > .list .item.purchased > .item-content > .item-thumbnail::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-image: url(/Icons/purchased-video.png);
+        }
+
+        .library > .list .item.disabled .item-content > .item-label,
+        .library > .list .item.purchasable:not(.purchased) > .item-content > .item-label {
+            opacity: 0.4;
+        }
+
+        .library > .list .item.disabled .item-content > .item-thumbnail::before,
+        .library > .list .item.purchasable:not(.purchased) > .item-content > .item-thumbnail::before {
+            content: '';
+            display: block;
+            position: absolute;
+            background: center/27px 27px no-repeat rgba(128,128,128,.6);
+            width: 100%;
+            height: 100%;
+        }
+
+        .library > .list .item.disabled .item-content > .item-thumbnail::before {
+            background-image: url(/Icons/LockedStatus_Icon.png);
+        }
+
+        .library > .list .item.purchasable:not(.purchased) > .item-content > .item-thumbnail::before {
+            background-image: url(/Icons/unlock-video.png);
+        }
+
+        .library > .list .item > .item-content > .item-label {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+        }
+
+            .library > .list .item > .item-content > .item-label > .item-ancestry {
+                font-size: 11px;
+                color: #39b54a;
+                flex-basis: 2em;
+            }
+
+            .library > .list .item > .item-content > .item-label > .item-title {
+                font-weight: bold;
+            }
+
+    .library > .item-viewer {
+        position: absolute;
+        background: black url(/Icons/Camera_Icon.png) center no-repeat;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        padding: 0px;
+        text-align: center;
+        color: red; /* For when there's an error message */
+    }
+
+        .library > .item-viewer > .item-title {
+            height: 0px;
+            margin-top: 1em;
+            margin-bottom: -1em;
+        }
+
+        .library > .item-viewer > .item-content {
+            height: 100%;
+            width: 100%;
+        }
+
+        .library > .item-viewer.audio {
+            background: #3FA9F5 url(Images/sound.gif) center/140px 120px no-repeat;
+        }
+
+            .library > .item-viewer.audio > .item-title {
+                color: white;
+            }

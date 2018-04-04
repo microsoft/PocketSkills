@@ -1,0 +1,850 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14pt;
+}
+
+    input.search {
+        background-image: url(/Icons/Search.png);
+        background-size: 18px;
+        background-position-x: right;
+        background-position-y: center;
+        background-origin: content-box;
+    }
+
+q,
+blockquote {
+    quotes: '\201c' '\201d' '\2018' '\2019';
+}
+
+    q::before,
+    q::after {
+        font-size: larger;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+*,
+*::before,
+*::after {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.ui-icon {
+    background-size: initial;
+    background-repeat: initial;
+}
+
+video,
+audio {
+    display: block;
+}
+
+button {
+    width: 48px;
+    height: 48px;
+    border: 0px;
+    padding: 0px;
+    background-size: 50%;
+    background-position: 50%;
+    background-color: transparent;
+}
+
+.screen {
+    padding: 0px 10px 40px 10px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+}
+
+    .screen,
+    .screen button,
+    .screen input,
+    .screen select,
+    .screen optgroup,
+    .screen textarea {
+        font-size: 12pt;
+    }
+
+        .screen h1,
+        .screen h2,
+        .screen h3,
+        .screen h4,
+        .screen h5,
+        .screen h6 {
+            color: #808080;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 25px 10px 0px 10px;
+        }
+
+        .screen flex > *:not(:first-child) {
+            flex-grow: 2;
+        }
+
+        .screen p,
+        .screen label,
+        .screen input,
+        .screen select,
+        .screen .value {
+            margin: 10px;
+        }
+
+            .screen input[type=radio]:checked + label {
+                color: #3FA9F5;
+            }
+
+        .screen .avatars input[type=radio] {
+            display: none;
+        }
+
+        .screen .avatars label {
+            display: block;
+        }
+
+            .screen .avatars label::before {
+                content: '';
+                display: inline-block;
+                width: 61px;
+                height: 66px;
+                vertical-align: middle;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                background-position: bottom;
+            }
+
+            .screen .avatars label[for="eChelsey"]::before {
+                background-image: url(/Icons/eChelsey_Normal_BW.png);
+            }
+
+        .screen .avatars input[type=radio]:checked + label[for="eChelsey"]::before {
+            background-image: url(/Icons/eChelsey_Expanded.png);
+            background-color: #3FA9F5;
+        }
+
+        .screen .avatars label[for="eChuck"]::before {
+            background-image: url(/Icons/eChuck_Normal_BW.png);
+        }
+
+        .screen .avatars input[type=radio]:checked + label[for="eChuck"]::before {
+            background-image: url(/Icons/eChuck_Expanded.png);
+            background-color: #3FA9F5;
+        }
+
+        .screen .avatars label[for="eLuna"]::before {
+            background-image: url(/Icons/eLuna_Normal_BW.png);
+        }
+
+        .screen .avatars input[type=radio]:checked + label[for="eLuna"]::before {
+            background-image: url(/Icons/eLuna_Expanded.png);
+            background-color: #3FA9F5;
+        }
+
+        .screen a {
+            color: #39B54A;
+        }
+
+        .screen.contact {
+            padding: 0px;
+        }
+
+            .screen.contact > div {
+                display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+        .screen .contact-top {
+            flex-grow: 1;
+            position: relative;
+            background-color: #2CA343;
+            color: white;
+            font-size: 18px;
+        }
+
+            .screen .contact-top > div {
+                position: absolute;
+                bottom: 0px;
+                margin-bottom: 24px;
+            }
+
+        .screen .contact-middle {
+            position: relative;
+            background-color: #3660E3;
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+            .screen .contact-middle > a {
+                position: absolute;
+                left: 16px;
+                top: -35px;
+            }
+
+            .screen .contact-middle > div {
+                margin-top: 24px;
+                margin-bottom: 24px;
+                white-space: nowrap;
+            }
+
+        .screen .contact-bottom {
+            position: relative;
+            background-color: white;
+            color: black;
+            font-size: 16px;
+        }
+
+            .screen .contact-bottom > img {
+                position: absolute;
+                left: 16px;
+                top: 24px;
+            }
+
+            .screen .contact-bottom > div {
+                margin-top: 24px;
+                margin-bottom: 24px;
+            }
+
+            .screen .contact-bottom a {
+                font-weight: bold;
+            }
+
+            .screen .contact-top > div,
+            .screen .contact-middle > div,
+            .screen .contact-bottom > div {
+                margin-left: 100px;
+                margin-right: 12px;
+            }
+
+#mainAgent {
+    display: none; /* She is only shown when she has something to say. */
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0px;
+    padding: 0px;
+    align-self: flex-end;
+    background-image: url(/Icons/Agent.png);
+    background-size: 100%;
+}
+
+#mainHeader,
+#mainFooter {
+    height: 48px;
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    align-items: center;
+    background-color: #4D4D4D;
+    color: white;
+    clear: both;
+}
+
+    #mainHeader > *,
+    #mainFooter > * {
+        flex-shrink: 0;
+    }
+
+    #mainFooter #mainNav {
+        flex-grow: 1;
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        #mainFooter #mainNav > * {
+            position: relative;
+        }
+
+    #mainFooter #navLeft,
+    #mainFooter #navBack {
+        display: none;
+        margin-right: auto;
+        background-image: url(/Icons/LeftArrow_Icon.png);
+    }
+
+    #mainFooter #navLabel,
+    #mainFooter #navDots {
+        display: none;
+        width: 0px;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        align-self: center;
+        white-space: nowrap;
+    }
+
+        #mainFooter #navDots > .navDot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-image: url(/Icons/GrayDot_Icon.png);
+        }
+
+            #mainFooter #navDots > .navDot.submitted {
+                background-image: url(/Icons/BlueDot_Icon.png);
+            }
+
+            #mainFooter #navDots > .navDot.active {
+                background-image: url(/Icons/WhiteDot_Icon.png);
+            }
+
+    #mainFooter #navRight,
+    #mainFooter #navForward {
+        display: none;
+        background-image: url(/Icons/RightArrow_Icon.png);
+    }
+
+    #mainFooter #navForward {
+        visibility: hidden; /* We don't handle forward yet */
+    }
+
+    #mainFooter #navDone {
+        display: none;
+        background-image: url(/Icons/Checkmark_Icon.png);
+    }
+
+    #mainFooter #navSave {
+        display: none;
+        background-image: url(/Icons/Save_Icon.png);
+    }
+
+    #mainFooter #navDelete {
+        display: none;
+        background-image: url(/Icons/Trash_Icon.png);
+    }
+
+    #mainFooter #navNew {
+        display: none;
+        background-image: url(/Icons/Add_Icon.png);
+    }
+
+    #mainFooter #navSparkles {
+        display: none;
+        background-image: url(/Icons/Sparkles_Icon.png);
+    }
+
+    #mainFooter #navDiaryCard {
+        background-image: url(/Icons/icon-menu-diarycard.png);
+        -webkit-transition: background-color 1s, -webkit-transform 1s;
+        transition: background-color 1s, transform 1s;
+    }
+
+        #mainFooter #navDiaryCard.highlight {
+            display: block !important; /* For Internet Explorer since it doesn't support display: initial */
+            display: initial !important;
+        }
+
+        #mainFooter #navDiaryCard.glow {
+            background-color: gold;
+            -webkit-transform: scale(2);
+            transform: scale(2);
+        }
+
+    #mainFooter.showAgent #mainAgent {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showScreen #navBack {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showNav #navBack,
+    #mainFooter.showNav #navDots,
+    #mainFooter.showNav #navForward {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showLav #navLeft,
+    #mainFooter.showLav #navLabel,
+    #mainFooter.showLav #navRight,
+    #mainFooter.showLav #navDone {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showSave #navSave,
+    #mainFooter.showDisabledSave #navSave {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showDelete #navDelete,
+    #mainFooter.showDisabledDelete #navDelete {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showSparkles #navSparkles,
+    #mainFooter.showDisabledSparkles #navSparkles {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showNew #navNew,
+    #mainFooter.showDisabledNew #showNew {
+        display: block; /* For Internet Explorer since it doesn't support display: initial */
+        display: initial;
+    }
+
+    #mainFooter.showLav #navBack,
+    #mainFooter.showLav #navDots,
+    #mainFooter.showLav #navForward,
+    #mainFooter.showLav #navSave,
+    #mainFooter.showLav #navDiaryCard,
+    #mainFooter.showNav #navDiaryCard,
+    #mainFooter.showScreen #navDots,
+    #mainFooter.showScreen #navForward,
+    #mainFooter.showScreen #navDiaryCard {
+        display: none;
+        pointer-events: none;
+    }
+
+    #mainFooter.showScreen.showNew #navNew,
+    #mainFooter.showScreen:not(.showNew) #navDone,
+    #mainFooter.showScreen.showSparkles:not(.showNew):not(.showDone) #navSparkles,
+    #mainFooter.showScreen.showDelete:not(.showNew):not(.showDone):not(.showSparkles) #navDelete,
+    #mainFooter.showScreen.showSave:not(.showNew):not(.showDone):not(.showSparkles):not(.showDelete) #navSave,
+    #mainFooter.showScreen:not(.showNew):not(.showDone):not(.showSparkles):not(.showDelete):not(.showSave) #navBack {
+        background-color: #39B54A;
+    }
+
+    #mainFooter.showDisabledNew #navNew,
+    #mainFooter.showDisabledSparkles #navSparkles,
+    #mainFooter.showDisabledDelete #navDelete,
+    #mainFooter.showDisabledSave #navSave {
+        background-color: #B3B3B3;
+    }
+
+#mainButton {
+    background-image: url(/Icons/PocketSkills_Logo.png);
+    background-size: 75%;
+}
+
+#mainTitle {
+    flex-grow: 1;
+    flex-shrink: 1;
+    font-size: 18pt;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+}
+
+#mainSparkles {
+    position: relative;
+    background-image: url(/Icons/Sparkles.png);
+}
+
+#mainPoints {
+    display: block;
+    position: absolute;
+    background-color: #39B54A;
+    border-radius: 15px 15px 15px 15px;
+    font-size: 8pt;
+    color: white;
+    padding: 2px 4px 2px 4px;
+    top: 5px;
+    left: 27px;
+    -webkit-transition: background-color 1s, -webkit-transform 1s;
+    transition: background-color 1s, transform 1s;
+}
+
+    #mainPoints.glow {
+        background-color: gold;
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+
+#mainHamburger {
+    background-image: url(/Icons/icon-menu-hamburger-open.png);
+}
+
+#mainHamburgerClose {
+    background-image: url(/Icons/icon-menu-hamburger-close.png);
+}
+
+#mainMenu {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: transparent;
+}
+
+    #mainMenu > #mainMenuContent {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        width: 240px;
+        background: #333333;
+        color: white;
+        font-size: 14px;
+    }
+
+        #mainMenu > #mainMenuContent > #mainMenuHeader {
+            background: black;
+        }
+
+        #mainMenu > #mainMenuContent > #mainMenuItems {
+            flex-grow: 1;
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+        }
+
+            #mainMenu > #mainMenuContent > #mainMenuHeader > *,
+            #mainMenu > #mainMenuContent > #mainMenuItems > * {
+                display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            #mainMenu > #mainMenuContent > #mainMenuItems .mainMenuItem,
+            #mainMenu > #mainMenuContent > #mainMenuFooter .mainMenuItem {
+                border-top: 2px solid #575757;
+            }
+
+        #mainMenu > #mainMenuContent > * > *:hover {
+            background: #3FA9F5;
+        }
+
+        #mainMenu > #mainMenuContent > #mainMenuItems > *:hover > .mainMenuItem,
+        #mainMenu > #mainMenuContent > #mainMenuFooter > *:hover > .mainMenuItem {
+            border-top: 2px solid #3FA9F5;
+        }
+
+    #mainMenu .spacer {
+        width: 30px;
+    }
+
+    #mainMenu .mainMenuItem {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        min-height: 22px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        margin-left: 30px;
+        margin-right: 5px;
+    }
+
+
+    #mainMenu img {
+        width: 18px;
+        vertical-align: bottom;
+        padding-right: 20px;
+    }
+
+    #mainMenu a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+#mainContent {
+    position: relative;
+    height: -webkit-calc(100% - 96px); /* Chrome */
+    height: -moz-calc(100% - 96px); /* Firefox */
+    height: calc(100% - 96px); /* native */
+}
+
+    #mainContent > * {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: white;
+    }
+
+#mainOverlay {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    pointer-events: none;
+}
+
+    #mainOverlay > #mainOverlayBackground {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background: white;
+    }
+
+        #mainOverlay > #mainOverlayBackground ~ * {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+    #mainOverlay > * {
+        opacity: 0;
+        transition: opacity 2s ease-in;
+    }
+
+    #mainOverlay.show > *.show,
+    #mainOverlay.show > #mainOverlayBackground {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+/* TODO: Ask about using https://github.com/gajus/brim to make it more full screen on iOS without adding it to home screen */
+
+#mainLoadingScreen {
+    position: fixed;
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    overflow: auto;
+    word-break: break-all;
+    background: #333333;
+    font-size: 12pt;
+    color: white;
+    text-align: center;
+}
+
+    /* To constrain content to bottom of the screen */
+    #mainLoadingScreen > .bottom {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        height: 25%;
+        overflow: hidden;
+        -webkit-mask-image: -webkit-gradient(linear, left 0%, left 50%, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+    }
+
+        /* To center content */
+        #mainLoadingScreen > .bottom > div {
+            position: absolute;
+            width: 100%;
+            bottom: 20px;
+        }
+
+            /* The actual content */
+            #mainLoadingScreen > .bottom > div > #mainLoadingStatus {
+                display: inline-block;
+                text-align: left;
+                color: silver;
+            }
+
+#windowsLiveSignIn,
+#invitationSignOut {
+    background-image: url(Images/windowslive_LTR_blue.png);
+    background-color: #C0DDEB;
+    color: black;
+    border: 1px solid #7AB1CC;
+    border-radius: 1px;
+    padding: 5px 5px 5px 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#invitationSignOut {
+    display: inline-block;
+    padding: 0px 4px 4px 30px;
+}
+
+.splashScreen {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    color: white;
+    background: #999999;
+    overflow-y: auto;
+}
+
+    .splashScreen > div {
+        padding: 20px;
+    }
+
+        .splashScreen > div:first-child {
+            color: black;
+            background: white;
+        }
+
+    .splashScreen section {
+        font-size: smaller;
+        margin: 20px 0px;
+        min-height: 1.2em;
+    }
+
+    .splashScreen form {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        border: 1px solid #999999;
+        height: 48px;
+    }
+
+    .splashScreen input[type="text"] {
+        flex-grow: 1;
+        min-width: 0px;
+        font-size: 40px;
+        font-family: Courier, monospace;
+        text-transform: lowercase;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+    }
+
+    .splashScreen input[type="image"] {
+        flex-shrink: 0;
+        height: 48px;
+        width: 48px;
+        border-radius: 0px;
+        background-color: #999999;
+    }
+
+    .splashScreen #mainInvitationError {
+        color: red;
+    }
+
+    .splashScreen img {
+        float: left;
+        width: 128px;
+        height: 128px;
+        margin: 0px 12px 12px 0px;
+    }
+
+    .splashScreen > .copyright {
+        clear: both;
+    }
+
+        .splashScreen > .copyright > * {
+            white-space: nowrap;
+        }
+
+.firstRun {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    text-align: center;
+    font-size: 12pt;
+    color: silver;
+    background: #3c3c3c;
+    padding: 15px;
+}
+
+    .firstRun .firstRunLogo {
+        background-image: url(/Icons/PocketSkills_Logo.png);
+        background-position: center;
+        height: 50px;
+    }
+
+    .firstRun .firstRunContent {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    .firstRun h3 {
+        color: white;
+        padding: 10px;
+    }
+
+    .firstRun a {
+        color: inherit;
+    }
+
+.firstRun {
+    display: none;
+}
+
+    .firstRun .firstRunContinue {
+        color: white;
+        background: green;
+        width: auto;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+flex,
+.flex {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+}
+
+    flex > *,
+    .flex > * {
+        flex: 1;
+    }
+
+.scrollabley {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+}
+
+.scrollablex {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+}
+
+.unclickable {
+    pointer-events: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin: 0;
+}
+
+clearfix {
+    display: block;
+    clear: both;
+}
+
+.pointIcon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: text-top;
+    background-image: url(/Icons/SparkleCount_Icon.png);
+}

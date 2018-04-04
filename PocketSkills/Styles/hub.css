@@ -1,0 +1,227 @@
+#Hub {
+    display: block; /* For Internet Explorer since it doesn't support display: initial */
+}
+
+#blades {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+    #blades > .blade,
+    #blades > .blade::before,
+    #blades > .blade > .sections > .section,
+    #blades > .blade > .sections > .section::before,
+    #blades > .blade .title {
+        -webkit-transition-duration: .33s;
+        -webkit-transition-timing-function: ease-out;
+        transition-duration: .33s;
+        transition-timing-function: ease-out;
+    }
+
+    #blades > .blade {
+        position: relative;
+        min-width: 0px;
+        max-width: 100%;
+        flex-basis: 0px;
+        flex-grow: 1;
+        border-right: 1px solid white;
+        height: 100%;
+
+        /* ----> Transitions ----> */
+        -webkit-transition-property: max-width, background-color;
+        transition-property: max-width, background-color;
+    }
+
+        /*** Styles when the blade is CLOSED ***/
+        #blades > .blade.closed {
+            flex-grow: 9999;
+            max-width: 48px;
+        }
+
+        /* This is the transparent filter/overlay over the previous blades */
+        #blades > .blade::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 9999px; /* This makes it cover everything to the left */
+            height: 100%;
+            right: 100%; /* This pushes it left off of this blade and onto the neighbor blades */
+            pointer-events: none; /* Make sure we can still tap things underneath it */
+            /* ----> Transitions ----> */
+            -webkit-transition-property: background-color;
+            transition-property: background-color;
+        }
+
+        #blades > .blade.closed::before {
+            background-color: rgba(0, 0, 0, .15);
+        }
+
+        #blades > .blade > .sections {
+            position: relative;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+        }
+
+        #blades > .blade.closed > .sections {
+        }
+
+        /* The layout of the each section when it's visible */
+        #blades > .blade > .sections > .section {
+            height: 64px;
+            margin: 12px;
+            padding-left: 30px;
+            border-bottom: 2px solid silver;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: border-color, height, margin, padding;
+            transition-property: border-color, height, margin, padding;
+            -webkit-transition-delay: .33s, 0s, 0s, 0s;
+            transition-delay: .33s, 0s, 0s, 0s;
+        }
+
+        /* The layout of each section when it's closed */
+        #blades > .blade.closed > .sections > .section {
+            height: 0px;
+            margin: 0px;
+            padding: 0px;
+            margin-bottom: -2px;
+            border-color: transparent;
+            /* ----> Transitions ----> */
+            -webkit-transition-duration: 0s, .33s, .33s, .33s;
+            transition-duration: 0s, .33s, .33s, .33s;
+            -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+        }
+
+
+        /* The little colored icon next to the title */
+        #blades > .blade > .sections > .section::before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            left: 12px;
+            width: 24px;
+            height: 24px;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: opacity;
+            transition-property: opacity;
+            -webkit-transition-delay: .33s;
+            transition-delay: .33s;
+        }
+
+        /* Hide the dot when the blade is closed */
+        #blades > .blade.closed > .sections > .section::before {
+            opacity: 0;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: none;
+            transition-property: none;
+            -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+        }
+
+        /* This is the vertical text inside the blades */
+        #blades > .blade .title {
+            position: relative;
+            display: inline-block;
+            top: 0px;
+            -webkit-transform-origin: left top;
+            transform-origin: left top;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: opacity, color, -webkit-transform, top, border, margin, padding;
+            transition-property: opacity, color, transform, top, border, margin, padding;
+            -webkit-transition-delay: .33s, 0s, 0s, 0s, 0s, 0s, 0s;
+            transition-delay: .33s, 0s, 0s, 0s, 0s, 0s, 0s;
+        }
+
+        #blades > .blade.closed .title {
+            opacity: 0;
+            white-space: nowrap;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: none;
+            transition-property: none;
+            -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+        }
+
+            #blades > .blade.closed .title.selected {
+                opacity: 1;
+                color: white;
+                -webkit-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+                top: 200px; /* This brings the text down */
+                border-left: 1px solid white; /* This is the white line below the text */
+                margin-left: 6px; /* This moves the whole box (including the white line) to the right */
+                padding-top: 12px; /* This moves the text to the right and makes the white line longer */
+                padding-bottom: 6px; /* This makes the white line longer, past the text */
+                padding-left: 12px; /* This moves the text up away from the white line */
+                line-height: 18px; /* This makes sure the font size doesn't affect our layout */
+                /* ----> Transitions ----> */
+                -webkit-transition-property: opacity, color, -webkit-transform, top, border, margin, padding;
+                transition-property: opacity, color, transform, top, border, margin, padding;
+            }
+
+        #blades > .blade > .sections > .section.Hidden {
+            display: none;
+        }
+
+        #blades > .blade > .sections > .section.Available .exercises {
+            color: #39B54A;
+        }
+
+        #blades > .blade > .sections > .section.Available::before {
+            background-image: url(/Icons/OnGoingStatus_Icon.png);
+        }
+
+        #blades > .blade.closed.Available {
+            background-color: #39B54A;
+        }
+
+        #blades > .blade > .sections > .section.Satisfied .exercises {
+            color: #3FA9F5;
+        }
+
+        #blades > .blade > .sections > .section.Satisfied::before {
+            background-image: url(/Icons/SatisfiedStatus_Icon.png);
+        }
+
+        #blades > .blade.closed.Satisfied {
+            background-color: #3FA9F5;
+        }
+
+        #blades > .blade > .sections > .section.Locked {
+            color: silver;
+        }
+
+            #blades > .blade > .sections > .section.Locked::before {
+                background-image: url(/Icons/LockedStatus_Icon.png);
+            }
+
+        #blades > .blade.closed.Locked {
+            background-color: silver;
+        }
+
+        #blades > .blade > .sections > .section > .exercises {
+            font-size: smaller;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: opacity;
+            transition-property: opacity;
+            -webkit-transition-delay: .33s;
+            transition-delay: .33s;
+        }
+
+        #blades > .blade.closed > .sections > .section > .exercises {
+            opacity: 0;
+            /* ----> Transitions ----> */
+            -webkit-transition-property: none;
+            transition-property: none;
+            -webkit-transition-delay: 0s;
+            transition-delay: 0s;
+        }
+
+        #blades > .blade.hidden {
+            max-width: 0px;
+            border: none;
+        }

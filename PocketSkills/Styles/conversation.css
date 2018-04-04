@@ -1,0 +1,382 @@
+.conversation {
+    line-height: 1.4;
+    font-weight: lighter;
+}
+
+    .conversation .bubble {
+        padding: 12px;
+        background-color: #F2F2F2; /* Grey */
+        border-radius: 6px;
+    }
+
+    .conversation > *,
+    .conversation > *::before,
+    .conversation > *::after {
+        transition: all .15s ease-out;
+    }
+
+    .conversation > * {
+        display: block;
+        position: relative;
+        margin-top: 12px;
+        margin-right: 12px;
+        margin-bottom: 12px;
+        clear: both;
+        -webkit-animation: .25s appear ease-out;
+        animation: .25s appear ease-out;
+        min-height: 24px;
+    }
+
+        .conversation > * + * {
+            margin-top: 0px;
+        }
+
+    .conversation > .agent {
+        margin-left: 76px;
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+    }
+
+        /* Profile pic */
+        .conversation > .agent.pic {
+        }
+
+            .conversation > .agent.pic::before {
+                content: '';
+                position: absolute;
+                top: 0px;
+                left: -64px;
+                height: 48px;
+                width: 48px;
+                background-image: url(/Icons/Agent.png);
+            }
+
+    /* Chat bubble triangle on bubbles */
+    .conversation .agent.pic.bubble::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        left: -20px;
+        border-style: solid;
+        border-width: 20px 0px 0px 20px;
+        border-color: #F2F2F2 transparent; /* Grey triangle */
+    }
+
+    .conversation > .user {
+        margin-left: 76px;
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+    }
+
+        /* Profile pic */
+        .conversation > .user.pic {
+            margin-right: 76px;
+        }
+
+            .conversation > .user.pic::before {
+                content: '';
+                position: absolute;
+                top: 0px;
+                right: -64px;
+                height: 48px;
+                width: 48px;
+                background-image: url(/Icons/eChelsey_Expanded.png);
+            }
+
+    .conversation.eChuck > .user.pic::before {
+        background-image: url(/Icons/eChuck_Expanded.png);
+    }
+
+    .conversation.eLuna > .user.pic::before {
+        background-image: url(/Icons/eLuna_Expanded.png);
+    }
+
+    /* Chat bubble triangle on bubbles */
+    .conversation .user.pic.bubble::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        right: -15px;
+        border-style: solid;
+        border-width: 20px 20px 0px 0px;
+        border-color: #F2F2F2 transparent;
+    }
+
+    /* Typing bubble */
+    .conversation > .typing {
+        float: left;
+        /*-webkit-animation: .25s typing ease-out;
+        animation: .25s typing ease-out;*/
+    }
+
+    /* Light green for selectable user items */
+    .conversation .selectable {
+        color: #39B54A;
+        background-color: #E3FCD9;
+    }
+
+        /* Change color of chat bubble triangle too */
+        .conversation .selectable.bubble.pic::after {
+            border-color: #E3FCD9 transparent;
+        }
+
+    /* Green color for checked/selected user items */
+    .conversation .selected {
+        color: white;
+        background-color: #39B54A;
+    }
+
+        /* Change color of chat bubble triangle too */
+        .conversation .selected.bubble.pic::after {
+            border-color: #39B54A transparent;
+        }
+
+    /* Light blue for submitted but unselected user items */
+    .conversation .submitted.selectable,
+    .conversation .submitted label.selectable {
+        color: #3FA9F5;
+        background-color: #D9EEFD;
+    }
+
+        /* Change color of chat bubble triangle too */
+        .conversation .submitted.selectable.bubble.pic::after,
+        .conversation .submitted .selectable.bubble.pic::after {
+            border-color: #D9EEFD transparent; /* Light blue */
+        }
+
+    /* Dark blue color for submitted/committed checked/selected user items */
+    .conversation .submitted.selected,
+    .conversation .submitted label.selected,
+    .conversation .submitted input[type=radio]:checked + label.selected {
+        color: white;
+        background-color: #3FA9F5;
+    }
+
+        /* Change color of chat bubble triangle too */
+        .conversation .submitted.selected.bubble.pic::after,
+        .conversation .submitted .selected.bubble.pic::after {
+            border-color: #3FA9F5 transparent; /* Dark blue */
+        }
+
+    /* Green color for submit button */
+    .conversation > .submit.bubble {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        color: white;
+        background: -moz-linear-gradient(left, #009245 0%, #009245 50px, #39b54a 50px, #39b54a 100%);
+        background: -webkit-linear-gradient(left, #009245 0%, #009245 50px, #39b54a 50px, #39b54a 100%);
+        background: linear-gradient(to right, #009245 0%, #009245 50px, #39b54a 50px, #39b54a 100%);
+    }
+
+        /* Change color of chat bubble triangle too */
+        .conversation > .submit.bubble.pic::after {
+            border-color: #39b54a transparent; /* Green */
+        }
+
+        .conversation > .submit.bubble > .submitDecorator {
+            flex-shrink: 0;
+            text-align: center;
+            margin-right: 24px;
+            width: 26px; /* The background is 50 pixels wide. 12 bubble padding + 26px + 24 px will put the content 62 pixels over */
+        }
+
+            .conversation > .submit.bubble > .submitDecorator::before {
+                content: '→';
+            }
+
+        .conversation > .submit.bubble.selected > .submitDecorator::before {
+            content: '✓';
+        }
+
+        /* Light blue color after submitting */
+        .conversation > .submit.bubble.submitted {
+            color: #3FA9F5;
+            background: -moz-linear-gradient(left, #BDE1F9 0%, #BDE1F9 50px, #D9EEFD 50px, #D9EEFD 100%);
+            background: -webkit-linear-gradient(left, #BDE1F9 0%, #BDE1F9 50px, #D9EEFD 50px, #D9EEFD 100%);
+            background: linear-gradient(to right, #BDE1F9 0%, #BDE1F9 50px, #D9EEFD 50px, #D9EEFD 100%);
+        }
+
+            .conversation > .submit.bubble.submitted.pic::after {
+                border-color: #D9EEFD transparent; /* Light blue */
+            }
+
+        /* Dark blue color for selected option after submitting */
+        .conversation > .submit.bubble.submitted.selected {
+            color: white;
+            background: -moz-linear-gradient(left, #0071BC 0%, #0071BC 50px, #3FA9F5 50px, #3FA9F5 100%);
+            background: -webkit-linear-gradient(left, #0071BC 0%, #0071BC 50px, #3FA9F5 50px, #3FA9F5 100%);
+            background: linear-gradient(to right, #0071BC 0%, #0071BC 50px, #3FA9F5 50px, #3FA9F5 100%);
+        }
+
+            .conversation > .submit.bubble.submitted.selected.pic::after {
+                border-color: #3FA9F5 transparent; /* Dark blue */
+            }
+
+   /* Don't allow pointer events on submitted stuff */
+    .conversation .submitted {
+        pointer-events: none;
+    }
+
+    /* Or disabled stuff */
+    .conversation .disabled {
+        pointer-events: none;
+        opacity: .5;
+    }
+
+    /* Horizontal scrolling controls take up the whole width of the screen. */
+    .conversation > .horizontalScroll {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 6px;
+        padding-right: 6px;
+        white-space: nowrap;
+        overflow-x: auto;
+        text-align: right;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS. */
+    }
+
+    /* Sliders */
+    .conversation > .slider input {
+        width: 100%;
+        vertical-align: middle;
+    }
+
+    .conversation > .slider .sliderLabels {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        justify-content: space-between;
+        font-size: small;
+    }
+
+    /* Calendars */
+    .conversation > .calendar {
+        font-size: 3vw;
+    }
+
+    /* Likert Scales */
+    .conversation > .likertscale label {
+        display: inline-block;
+        min-width: 64px;
+        min-height: 64px;
+        line-height: 64px;
+        border-radius: 9999px;
+        text-align: center;
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    /* Radio Buttons */
+    .conversation > .radiobutton {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+    }
+
+        .conversation > .radiobutton label {
+            display: inline-block;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+            .conversation > .radiobutton label + input + label {
+                margin-left: 12px;
+            }
+
+    /* Styles for if we want to have the bubbles hug to the left or the right */
+    .conversation > .left {
+        float: left;
+    }
+
+    .conversation > .right {
+        float: right;
+    }
+
+    /* We want to be able to use headings in the chat bubbles without using too much space */
+    .conversation h1,
+    .conversation h2,
+    .conversation h3,
+    .conversation h4,
+    .conversation h5,
+    .conversation h6 {
+        margin: 0px;
+    }
+
+    .conversation .placeholder,
+    .conversation .wait {
+        font-style: italic;
+        color: silver;
+    }
+
+    .conversation .skillselect,
+    .conversation .submitted.skillselect {
+        background-color: transparent;
+        color: black;
+    }
+
+        .conversation .skillselect img {
+            width: 64px;
+            height: 64px;
+            background-color: black;
+            float: left;
+            margin-right: 12px;
+        }
+
+        .conversation .skillselect .points {
+            color: black;
+        }
+
+    .conversation .selected.skillselect {
+        color: #3FA9F5;
+    }
+
+        .conversation .selected.skillselect img {
+            background-color: #3FA9F5;
+        }
+
+    .conversation img,
+    .conversation audio,
+    .conversation video {
+        width: 100%;
+        vertical-align: middle;
+    }
+
+@-webkit-keyframes typing {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes typing {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes appear {
+    from {
+        -webkit-transform: scale(0);
+    }
+
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

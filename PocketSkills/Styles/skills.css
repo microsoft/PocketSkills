@@ -1,0 +1,70 @@
+﻿.skills {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+}
+
+    .skills > .search {
+        background-color: #F2F2F2;
+        border: 0px;
+        border-radius: 5px;
+        height: 42px;
+        padding: 0px 10px;
+        margin: 12px 0px;
+    }
+
+    .skills > .list > .skill {
+        display: list-item;
+        list-style-type: decimal;
+        list-style-position: inside;
+        font-weight: bold;
+        color: #39b54a;
+        margin-bottom: 10px;
+        margin-left: 12px;
+    }
+
+        .skills > .list > .skill > .skill-label {
+            margin-top: 18px;
+            margin-bottom: 18px;
+        }
+
+            .skills > .list > .skill > .skill-label,
+            .skills > .list > .skill > .skill-label > * {
+                display: inline-block;
+            }
+
+                .skills > .list > .skill > .skill-label + .skill {
+                    border-top: 1px solid silver;
+                }
+
+        .skills > .list > .skill > .skill {
+            font-weight: initial;
+            color: initial;
+            margin-left: -12px;
+        }
+
+            .skills > .list > .skill > .skill > .skill {
+                margin-left: 12px;
+            }
+
+        .skills > .list > .skill .skill-label {
+            display: -webkit-inline-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 12px;
+            min-height: 50px;
+        }
+
+    .skills .skill-icon {
+        flex-shrink: 0;
+        background-color: #39b54a;
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .skills .points {
+        font-weight: lighter;
+    }

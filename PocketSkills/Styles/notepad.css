@@ -1,0 +1,102 @@
+﻿.notepad {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+}
+
+    .notepad > .search {
+        background-color: #F2F2F2;
+        border: 0px;
+        border-radius: 5px;
+        height: 42px;
+        padding: 0px 10px;
+        margin: 12px 0px;
+    }
+
+    .notepad > .notes > .note {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+        .notepad > .notes > .note > .note-selector {
+            flex-shrink: 0;
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F2F2F2;
+            height: 25px;
+            width: 0px;
+            margin: 0px;
+            -webkit-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+        }
+
+            .notepad > .notes > .note > .note-selector > input[type="checkbox"] {
+                display: none;
+            }
+
+    .notepad > .notes.showDelete > .note > .note-selector {
+        width: 25px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .notepad > .notes > .note.selected > .note-selector::before {
+        content: '✘';
+    }
+
+    .notepad > .notes > .note > .note-icon {
+        flex-shrink: 0;
+        background-image: url("/Icons/EditNote_Icon.png");
+        background-color: #E6E6E6;
+        width: 50px;
+        height: 50px;
+    }
+
+    .notepad > .notes > .note > .note-label {
+        flex-grow: 1;
+        padding-left: 15px;
+    }
+
+        .notepad > .notes > .note > .note-label > .note-title {
+            font-weight: bold;
+        }
+
+    .notepad > .note-editor {
+        display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+        display: flex;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        padding: 0px 10px;
+        background: white;
+        flex-direction: column;
+    }
+
+        .notepad > .note-editor > .note-title {
+            background-color: #F2F2F2;
+            border: 0px;
+            border-radius: 5px;
+            height: 42px;
+            padding: 0px 10px;
+            margin: 12px 0px;
+        }
+
+        .notepad > .note-editor > .note-date {
+            font-weight: bold;
+            margin: 8px;
+        }
+
+        .notepad > .note-editor > .note-content {
+            flex: 1;
+            margin: 8px;
+            border: 0px;
+            padding: 0px;
+        }

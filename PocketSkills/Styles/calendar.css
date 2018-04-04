@@ -1,0 +1,83 @@
+﻿#Calendar {
+    padding: 0px;
+}
+
+.calendarscreen {
+    display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .calendarscreen > .calendar {
+        padding: 10px;
+    }
+
+        .calendarscreen > .calendar > .ui-datepicker {
+            width: 100%;
+            box-sizing: border-box;
+            border: 0px;
+        }
+
+            .calendarscreen > .calendar > .ui-datepicker .done:not(.ui-datepicker-today) > a:not(.ui-state-active) {
+                background-color: #E2F2FE;
+                border-color: #3fa9f5;
+            }
+
+            .calendarscreen > .calendar > .ui-datepicker .undone:not(.ui-datepicker-today) > a:not(.ui-state-active) {
+                background-color: #E1F4E4;
+                border-color: #39b54a;
+            }
+
+            .calendarscreen > .calendar > .ui-datepicker .missed:not(.ui-datepicker-today) > a:not(.ui-state-active) {
+                background-color: #FCDDDE;
+                border-color: #ed1c24;
+            }
+
+    .calendarscreen > .activities {
+        flex: 1;
+        padding: 15px 15px 40px 15px;
+        background: #f2f2f2;
+    }
+
+        .calendarscreen > .activities > .activitiesHeader {
+            font-size: 18px;
+        }
+
+        .calendarscreen > .activities > .activity {
+            display: -webkit-flex; /* For my Samsung Galaxy S4 test device running Android 4.4 */
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+            .calendarscreen > .activities > .activity::before {
+                content: '';
+                width: 23px;
+                height: 23px;
+                margin-right: 10px;
+                flex-shrink: 0;
+            }
+
+            .calendarscreen > .activities > .activity.done::before {
+                background-image: url("/Icons/Task-done.png");
+            }
+
+            .calendarscreen > .activities > .activity.undone::before {
+                background-image: url("/Icons/Task-undone.png");
+            }
+
+            .calendarscreen > .activities > .activity.missed::before {
+                background-image: url("/Icons/Task-missed.png");
+            }
+
+        .calendarscreen > .activities > .activitiesPlaceholder {
+            height: 100%;
+            background-size: 60px 60px;
+            background-position: center;
+            background-image: url(/Icons/No-activities-green.png);
+        }
+
+        .calendarscreen > .activities.past > .activitiesPlaceholder {
+            background-image: url(/Icons/No-activities-blue.png);
+        }
