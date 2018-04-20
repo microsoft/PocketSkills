@@ -90,7 +90,8 @@
         Invalid,
         Expired,
         InUse,
-        NoCode
+        NoCode,
+        NoCodesAvailable
     }
 
     public string GetPreviousInvitationCode()
@@ -106,7 +107,13 @@
             return CodeStatus.NoCode;
         }
 
-        var latestCodes = Azure.Get("content", "InvitationCodes", "Latest").Properties["ID"].StringValue;
+        var latest = Azure.Get("content", "InvitationCodes", "Latest");
+        if (latest == null)
+        {
+            return CodeStatus.NoCodesAvailable;
+        }   
+        
+        var latestCodes = latest.Properties["ID"].StringValue;
         var matchingCode = Azure.Query("content", String.Format("PartitionKey eq '{0}' and Code eq '{1}'", latestCodes, invitationCode)).SingleOrDefault();
         if (matchingCode == null)
         {
@@ -155,6 +162,7 @@
     var error = status == CodeStatus.Invalid ? (isNew ? "Invalid invitation code." : "Your invitation code is no longer valid.") :
                 status == CodeStatus.Expired ? (isNew ? "That code has expired." : "Your invitation code has expired.") :
                 status == CodeStatus.InUse ? (isNew ? "That code is being used by another account." : "Your invitation code is being used by another account.") :
+                status == CodeStatus.NoCodesAvailable ? (isNew ? "No invitation codes are available." : "Your invitation code is no longer available.") :
                 null;
     @Reject(error);
 }

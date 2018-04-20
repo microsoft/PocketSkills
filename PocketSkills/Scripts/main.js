@@ -104,12 +104,12 @@ $(function main() {
         window.logTable = azure.getTable(server.SAS_logs);
 
         $('#mainInvitationStatus').empty();
-        if (server.SAS_error || !server.SAS_content) {
-            showLoad("Showing Invitation Page... " + (server.SAS_error || ""));
+        if (server.error || !server.SAS_content) {
+            showLoad("Showing Invitation Page... " + (server.error || ""));
             $('#mainLoadingScreen').fadeOut('slow');
 
             $("#mainInvitationBlocker").show();
-            $('#mainInvitationError').text(server.SAS_error);
+            $('#mainInvitationError').text(server.error);
             setTimeout(function () { $('#mainInvitationError').effect('bounce'); });
         } else {
             $("#mainInvitationBlocker").fadeOut('slow');
@@ -128,7 +128,7 @@ $(function main() {
             loads.push(calendar.load(server.SAS_calendar, server.userID));
             loads.push(diarycards.load(server.SAS_diarycards, server.SAS_content, server.userID));
             loads.push(data.load(server.SAS_data, server.userID));
-            
+
             $.when.apply($, loads).done(finish).fail(function fail(jqxhr, textStatus, error) {
                 showLoad("Error Loading Data: '" + textStatus + "', '" + error + "'.");
                 $('#mainLoadingScreen').show();
@@ -148,7 +148,7 @@ $(function main() {
         loaded = Date();
         log("Content and Data Loaded on " + loaded);
         data.set('Login', location.href);
-        
+
         // We store the acceptance of the First Run Experience per-device.
         if (!localStorage.getItem('FirstRunAccepted')) {
             showLoad("Loading First Run Experience...");
@@ -470,12 +470,12 @@ $(function main() {
             $points.animate({
                 Points: +data.get('Points') || 0
             }, {
-                duration: 2000,
-                step: function (now) {
-                    $(this).text(Math.ceil(now));
-                },
-                queue: false
-            });
+                    duration: 2000,
+                    step: function (now) {
+                        $(this).text(Math.ceil(now));
+                    },
+                    queue: false
+                });
         }
     }
 
