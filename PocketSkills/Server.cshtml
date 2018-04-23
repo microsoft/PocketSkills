@@ -21,7 +21,7 @@
             }
 
             var status = VerifyCode(invitationCode, isNew);
-            if (status == CodeStatus.Valid)
+            if (status == CodeStatus.Valid || status == CodeStatus.NoCodesAvailable)
             {
                 if (isNew)
                 {
@@ -122,7 +122,7 @@
 
         DateTime expiryDate;
         if (matchingCode.Properties.ContainsKey("ExpiryDate") &&
-            DateTime.TryParse(matchingCode.Properties["ExpiryDate"].StringValue, out expiryDate) &&
+            DateTime.TryParse(matchingCode.Properties["ExpiryDate"].PropertyAsObject.ToString(), out expiryDate) &&
             expiryDate <= DateTime.Now)
         {
             return CodeStatus.Expired;

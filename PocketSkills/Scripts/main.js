@@ -53,13 +53,14 @@ $(function main() {
         showLoad("Error loading " + settings.url, writeLog);
         if (jqXHR && jqXHR.responseText) {
             $('#mainLoadingStatus').append($('<div>').html(jqXHR.responseText));
-        }
-        try {
-            showLoad("Event: " + $.stringify(event), writeLog);
-            showLoad("XHR: " + $.stringify(jqXHR), writeLog);
-            showLoad("Error: " + $.stringify(error), writeLog);
-        } catch (e) {
-            showLoad("Exception: " + e, writeLog);
+        } else {
+            try {
+                showLoad("Event: " + $.stringify(event), writeLog);
+                showLoad("XHR: " + $.stringify(jqXHR), writeLog);
+                showLoad("Error: " + $.stringify(error), writeLog);
+            } catch (e) {
+                showLoad("Exception: " + e, writeLog);
+            }
         }
     });
 
@@ -130,9 +131,8 @@ $(function main() {
             loads.push(data.load(server.SAS_data, server.userID));
 
             $.when.apply($, loads).done(finish).fail(function fail(jqxhr, textStatus, error) {
-                showLoad("Error Loading Data: '" + textStatus + "', '" + error + "'.");
+                showLoad(error + ": " + textStatus);
                 $('#mainLoadingScreen').show();
-                $('#mainLoadingStatus').append($('<a href="/">Retry</a>'));
             });
 
             $('#mainSignedInPic').attr('src', 'https://apis.live.net/v5.0/' + server.userID + '/picture?type=small');
@@ -168,8 +168,8 @@ $(function main() {
 
         log("User entered invitation code '" + code + "'")
 
-        if (!/[A-Za-z]{6}/.test(code)) {
-            $('#mainInvitationStatus').text("The code should be exactly six letters.");
+        if (!/[A-Za-z0-9]{6}/.test(code)) {
+            $('#mainInvitationStatus').text("The code should be exactly six letters or numbers.");
             setTimeout(function () { $('#mainInvitationStatus').effect('bounce'); });
         } else {
             $('#mainInvitationStatus').text("Checking code...");

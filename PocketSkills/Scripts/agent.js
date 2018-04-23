@@ -13,7 +13,7 @@ function Agent(element, data) {
 
     _this.$agent = $(element);
     _this.data = data;
-    _this.content = new Content('MarshaSays');
+    _this.content = new Content('AgentSays');
 
     _this.lines = []; // Contains each ordered line that the agent can say.
     _this.lineIndex = -1; // The last line that's been displayed.
