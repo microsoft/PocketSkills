@@ -1,7 +1,4 @@
 ﻿using Microsoft.Azure.KeyVault;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,6 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.WebPages.Html;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 public static class Azure
 {
