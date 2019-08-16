@@ -25,7 +25,7 @@ public static class Azure
     static Azure()
     {
         StorageConnectionString = Environment.GetEnvironmentVariable("StorageAccount");
-        if (StorageConnectionString.StartsWith("http")) // Can set this to an Azure KeyVault URL to get the connection string from Azure Key Vault.
+        if (StorageConnectionString != null && StorageConnectionString.StartsWith("http")) // Can set this to an Azure KeyVault URL to get the connection string from Azure Key Vault.
         {
             var kv = new KeyVaultClient(async (string authority, string resource, string scope) =>
             {
