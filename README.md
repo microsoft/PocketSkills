@@ -42,11 +42,16 @@ PocketSkills is an empty web application shell that contains no substantial cont
 38. Expand the Tables if not expanded alread, and right-click on the content table you just created and click Get Shared Access Signature.
 39. Give the new Shared Access Signature a fairly long lifetime (i.e. 100 years) with Query access only and click Create.
 40. Copy the URL for use in later steps.
-41. In the Azure portal go to the App Service you created in Step 4, then click on Configuration in the middle pane.
-42. Click on New application setting, name it MediaLocation, and set the value to https://YOURSTEP26NAMEHERE.blob.core.windows.net/media
-43. Click on New application setting, name it StorageAccount, and paste in the Connection String that you copied in step 28.
-44. Click on New application setting, name it ContentSAS, and paste in the Shared Access Signature URL that you copied in step 40.
-45. Scroll up and click the blue Save button.
+41. Click on the CORS button in the middle pane, and you should see a new screen appear with Blob service, File service, Queue service, and Table service.
+42. Under Blob Service, fill in a * (asterisk) in the Allowed Origins, Allowed Headers, and Exposed Headers columns.
+43. In the Allowed Methods column, check all of the methods.
+44. In the Max Age column, fill in 9999.
+45. Under Table Service, repeat steps 42-44, and then click the blue Save button.
+46. In the Azure portal go to the App Service you created in Step 4, then click on Configuration in the middle pane.
+47. Click on New application setting, name it MediaLocation, and set the value to https://YOURSTEP26NAMEHERE.blob.core.windows.net/media
+48. Click on New application setting, name it StorageAccount, and paste in the Connection String that you copied in step 28.
+49. Click on New application setting, name it ContentSAS, and paste in the Shared Access Signature URL that you copied in step 40.
+50. Scroll up and click the blue Save button.
 
 
 # Contributing
