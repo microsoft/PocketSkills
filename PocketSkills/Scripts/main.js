@@ -29,7 +29,11 @@ window.log = function (message) {
 $(function main() {
     'use strict';
 
+    console.log("jerry - pre initialise");
+    
     showLoad("Initializing Objects...");
+    
+    console.log("jerry - post initialise");
 
     window.settings = new Settings();
     var data = new Data('Data');
