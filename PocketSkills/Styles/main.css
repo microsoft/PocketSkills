@@ -334,22 +334,22 @@ button {
         background-image: url(/Icons/Sparkles_Icon.png);
     }
 
-    #mainFooter #navDiaryCard {
+    /*#mainFooter #navDiaryCard {
         background-image: url(/Icons/icon-menu-diarycard.png);
         -webkit-transition: background-color 1s, -webkit-transform 1s;
         transition: background-color 1s, transform 1s;
     }
 
         #mainFooter #navDiaryCard.highlight {
-            display: block !important; /* For Internet Explorer since it doesn't support display: initial */
-            display: initial !important;
+            display: block !important;*/ /* For Internet Explorer since it doesn't support display: initial */
+            /*display: initial !important;
         }
 
         #mainFooter #navDiaryCard.glow {
             background-color: gold;
             -webkit-transform: scale(2);
             transform: scale(2);
-        }
+        }*/
 
     #mainFooter.showAgent #mainAgent {
         display: block; /* For Internet Explorer since it doesn't support display: initial */
@@ -634,7 +634,8 @@ button {
     right: 0px;
     overflow: auto;
     word-break: break-all;
-    background: #333333;
+   /* background: #333333; */
+    background: pink;
     font-size: 12pt;
     color: white;
     text-align: center;
