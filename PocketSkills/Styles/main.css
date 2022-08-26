@@ -634,8 +634,7 @@ button {
     right: 0px;
     overflow: auto;
     word-break: break-all;
-   /* background: #333333; */
-    background: pink;
+    background: #333333;
     font-size: 12pt;
     color: white;
     text-align: center;
